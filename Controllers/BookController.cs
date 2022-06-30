@@ -4,16 +4,16 @@ namespace Library_Management_System.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class BookController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<BookController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public BookController(ILogger<BookController> logger)
         {
             _logger = logger;
         }
