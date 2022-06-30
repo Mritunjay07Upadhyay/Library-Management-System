@@ -7,6 +7,6 @@ namespace Library_Management_System.Controllers
     [ApiController]
     public class GETController : ControllerBase
     {
-        Console.Writeline("LMS");
+        
     }
 }
