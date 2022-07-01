@@ -16,9 +16,9 @@ namespace Library_Management_System.Controllers
         }
 
         List<Book> Books = new List<Book>() {
-                new Book() { BookID = 1, BookTitle = "Book1"},
-                new Book() { BookID = 2, BookTitle = "Book2"},
-                new Book() { BookID = 3, BookTitle = "Book3"},
+                new Book() { Id = 1, Title = "Book1"},
+                new Book() { Id = 2, Title = "Book2"},
+                new Book() { Id = 3, Title = "Book3"},
         };
 
         [HttpGet]
@@ -31,10 +31,10 @@ namespace Library_Management_System.Controllers
             return Ok(Books);
         }
 
-        [HttpGet("GetBook")]
+        [HttpGet]
         public IActionResult GetBook(int BookID)
         {
-            var book = Books.FirstOrDefault(x => x.BookID == BookID);
+            var book = Books.FirstOrDefault(x => x.Id == BookID);
             if (book == null)
             {
                 return NotFound("No Record Found");
@@ -56,7 +56,7 @@ namespace Library_Management_System.Controllers
         [HttpDelete]
         public IActionResult DeleteBook(int BookID)
         {
-            var book = Books.FirstOrDefault(x =>x.BookID == BookID);
+            var book = Books.FirstOrDefault(x =>x.Id == BookID);
             if (book == null)
             {
                 return NotFound("No User Found");

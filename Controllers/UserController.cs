@@ -16,9 +16,9 @@ namespace Library_Management_System.Controllers
         }
 
         List<User> Users = new List<User>() {
-                new User() { UserID = 1, UserName = "Sandeep"},
-                new User() { UserID = 2, UserName = "Mritunjay"},
-                new User() { UserID = 3, UserName = "Rahul"},    
+                new User() { Id = 1, Name = "Sandeep"},
+                new User() { Id = 2, Name = "Mritunjay"},
+                new User() { Id = 3, Name = "Rahul"}
         };
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace Library_Management_System.Controllers
         [HttpGet("GetUser")]
         public IActionResult GetUser(int UserID)
         {
-            var user = Users.FirstOrDefault(x => x.UserID == UserID);
+            var user = Users.FirstOrDefault(x => x.Id == UserID);
             if(user == null)
             {
                 return NotFound("No Record Found");
@@ -57,7 +57,7 @@ namespace Library_Management_System.Controllers
         [HttpDelete]
         public IActionResult DeleteUser(int UserID)
         {
-            var user = Users.FirstOrDefault(x => x.UserID == UserID);
+            var user = Users.FirstOrDefault(x => x.Id == UserID);
             if(user == null)
             {
                 return NotFound("No User Found");
