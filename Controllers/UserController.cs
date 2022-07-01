@@ -33,10 +33,10 @@ namespace Library_Management_System.Controllers
         }
 
         [HttpGet("GetUser")]
-        public IActionResult GetUser(int UserID)
+        public IActionResult GetUser(int Id)
         {
-            var user = Users.FirstOrDefault(x => x.Id == UserID);
-            if(user == null)
+            var user = Users.FirstOrDefault(x => x.Id == Id);
+            if (user == null)
             {
                 return NotFound("No Record Found");
             }
@@ -47,7 +47,7 @@ namespace Library_Management_System.Controllers
         public IActionResult PostUser(User user)
         {
             Users.Add(user);
-            if(Users.Count == 0)
+            if (Users.Count == 0)
             {
                 return NotFound("No List Found");
             }
@@ -55,16 +55,16 @@ namespace Library_Management_System.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteUser(int UserID)
+        public IActionResult DeleteUser(int Id)
         {
-            var user = Users.FirstOrDefault(x => x.Id == UserID);
-            if(user == null)
+            var user = Users.FirstOrDefault(x => x.Id == Id);
+            if (user == null)
             {
                 return NotFound("No User Found");
             }
             Users.Remove(user);
 
-            if(Users.Count == 0)
+            if (Users.Count == 0)
             {
                 return NotFound("No Record Found");
             }
