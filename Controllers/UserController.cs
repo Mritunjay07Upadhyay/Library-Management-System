@@ -43,5 +43,33 @@ namespace Library_Management_System.Controllers
             return Ok(user);
         }
 
+        [HttpPost]
+        public IActionResult PostUser(User user)
+        {
+            Users.Add(user);
+            if(Users.Count == 0)
+            {
+                return NotFound("No List Found");
+            }
+            return Ok(Users);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteUser(int UserID)
+        {
+            var user = Users.FirstOrDefault(x => x.UserID == UserID);
+            if(user == null)
+            {
+                return NotFound("No User Found");
+            }
+            Users.Remove(user);
+
+            if(Users.Count == 0)
+            {
+                return NotFound("No Record Found");
+            }
+            return Ok(Users);
+        }
+
     }
-}
+} 

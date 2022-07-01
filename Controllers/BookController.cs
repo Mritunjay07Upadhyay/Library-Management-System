@@ -28,12 +28,11 @@ namespace Library_Management_System.Controllers
             {
                 return NotFound("Try Again");
             }
-
             return Ok(Books);
         }
 
         [HttpGet("GetBook")]
-        public IActionResult GetUser(int BookID)
+        public IActionResult GetBook(int BookID)
         {
             var book = Books.FirstOrDefault(x => x.BookID == BookID);
             if (book == null)
@@ -41,6 +40,34 @@ namespace Library_Management_System.Controllers
                 return NotFound("No Record Found");
             }
             return Ok(book);
+        }
+
+        [HttpPost]
+        public IActionResult PostBook(Book book)
+        {
+            Books.Add(book);
+            if (Books.Count == 0)
+            {
+                return NotFound("No List Found");
+            }
+            return Ok(Books);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteBook(int BookID)
+        {
+            var book = Books.FirstOrDefault(x =>x.BookID == BookID);
+            if (book == null)
+            {
+                return NotFound("No User Found");
+            }
+            Books.Remove(book);
+
+            if (Books.Count == 0)
+            {
+                return NotFound("No Record Found");
+            }
+            return Ok(Books);
         }
 
     }
