@@ -33,7 +33,7 @@ namespace Library_Management_System.Controllers
             return Ok(Books);
         }
 
-        [HttpGet("GetBook")]
+        [HttpGet("ID")]
         public IActionResult GetBook(int Id)
         {
             var book = Books.FirstOrDefault(x => x.Id == Id);

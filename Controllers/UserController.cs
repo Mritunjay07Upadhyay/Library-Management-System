@@ -32,7 +32,7 @@ namespace Library_Management_System.Controllers
             return Ok(Users);
         }
 
-        [HttpGet("GetUser")]
+        [HttpGet("ID")]
         public IActionResult GetUser(int Id)
         {
             var user = Users.FirstOrDefault(x => x.Id == Id);
