@@ -11,5 +11,18 @@ namespace Library_Management_System.Controllers
         {
             return Ok(UserData.users.user);
         }
+
+        [HttpGet("{ID}")]
+        public ActionResult GetUser(int id)
+        {
+            // Find City
+            var UserToReturn = UserData.users.user.FirstOrDefault(c => c.Id == id);
+
+            if (UserToReturn == null)
+            {
+                return NotFound();
+            }
+            return Ok(UserToReturn);
+        }
     }
 }
