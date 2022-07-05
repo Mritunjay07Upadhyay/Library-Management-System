@@ -4,72 +4,52 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Management_System.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/User")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-
-        public UserController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
-        List<User> Users = new List<User>() {
-                new User() { Id = 1, Name = "Sandeep"},
-                new User() { Id = 2, Name = "Mritunjay"},
-                new User() { Id = 3, Name = "Rahul"}
-        };
-
         [HttpGet]
-        public IActionResult GetUsers()
+        public ActionResult<IEnumerable<UserData>> GetUsers()
         {
-            if(Users.Count == 0)
-            {
-                return NotFound("Try Again");
-            }
-
-            return Ok(Users);
+            return Ok(UserData.users.user);
         }
 
-        [HttpGet("GetUser")]
-        public IActionResult GetUser(int UserID)
+        [HttpGet("{ID}")]
+        public ActionResult GetUser(int id)
         {
-            var user = Users.FirstOrDefault(x => x.Id == UserID);
-            if(user == null)
+            // Find City
+            var UserToReturn = UserData.users.user.FirstOrDefault(c => c.Id == id);
+
+            if (UserToReturn == null)
             {
-                return NotFound("No Record Found");
+                return NotFound();
             }
-            return Ok(user);
+            return Ok(UserToReturn);
         }
 
         [HttpPost]
-        public IActionResult PostUser(User user)
+        public ActionResult saveuser(int id, String Name)
         {
-            Users.Add(user);
-            if(Users.Count == 0)
+            UserModel user = new UserModel()
             {
-                return NotFound("No List Found");
-            }
-            return Ok(Users);
+                Id = id,
+                Name = Name
+            };
+            UserData.users.user.Add(user);
+
+            return Ok();
         }
 
         [HttpDelete]
-        public IActionResult DeleteUser(int UserID)
+        public ActionResult removeuser(int id)
         {
-            var user = Users.FirstOrDefault(x => x.Id == UserID);
-            if(user == null)
+            UserModel user = new UserModel()
             {
-                return NotFound("No User Found");
-            }
-            Users.Remove(user);
+                Id = id
+            };
+            UserData.users.user.Remove(user);
 
-            if(Users.Count == 0)
-            {
-                return NotFound("No Record Found");
-            }
-            return Ok(Users);
+            return Ok(true);
         }
-
     }
-} 
+}

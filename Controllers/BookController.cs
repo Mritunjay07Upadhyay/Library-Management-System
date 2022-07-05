@@ -4,70 +4,41 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Management_System.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Book")]
     [ApiController]
     public class BookController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-
-        public BookController(IConfiguration configuration)
+        [HttpGet]
+        public ActionResult<IEnumerable<BookData>> GetBooks()
         {
-            _configuration = configuration;
+            return Ok(BookData.books.book);
         }
 
-        List<Book> Books = new List<Book>() {
-                new Book() { Id = 1, Title = "Book1"},
-                new Book() { Id = 2, Title = "Book2"},
-                new Book() { Id = 3, Title = "Book3"},
-        };
-
-        [HttpGet]
-        public IActionResult GetBooks()
+        [HttpGet("{Id}")]
+        public ActionResult GetUser(int id)
         {
-            if (Books.Count == 0)
-            {
-                return NotFound("Try Again");
-            }
-            return Ok(Books);
-        }
+            // Find City
+            var BookToReturn = BookData.books.book.FirstOrDefault(c => c.Id == id);
 
-        [HttpGet]
-        public IActionResult GetBook(int BookID)
-        {
-            var book = Books.FirstOrDefault(x => x.Id == BookID);
-            if (book == null)
+            if (BookToReturn == null)
             {
-                return NotFound("No Record Found");
+                return NotFound();
             }
-            return Ok(book);
+            return Ok(BookToReturn);
         }
 
         [HttpPost]
-        public IActionResult PostBook(Book book)
+        public ActionResult SaveBook(string name, string author)
         {
-            Books.Add(book);
-            if (Books.Count == 0)
+            BookModel book = new BookModel()
             {
-                return NotFound("No List Found");
-            }
-            return Ok(Books);
-        }
+                Name = name,
+                Author = author
+            };
 
-        [HttpDelete]
-        public IActionResult DeleteBook(int BookID)
-        {
-            var book = Books.FirstOrDefault(x =>x.Id == BookID);
-            if (book == null)
-            {
-                return NotFound("No User Found");
-            }
-            Books.Remove(book);
+            BookData.books.book.Add(book);
 
-            if (Books.Count == 0)
-            {
-                return NotFound("No Record Found");
-            }
-            return Ok(Books);
+            return Ok(true);
         }
 
     }
