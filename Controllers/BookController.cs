@@ -41,5 +41,18 @@ namespace Library_Management_System.Controllers
             return Ok(true);
         }
 
+        [HttpPost]
+        public ActionResult SaveUserBook(int userId, int bookId)
+        {
+            UserBookModel userbook = new UserBookModel()
+            {
+                BookId = bookId,
+                UserId = userId
+            };
+
+            BookData.books.userbook.Add(userbook);
+
+            return Ok(true);
+        }
     }
 }

@@ -2,8 +2,8 @@
 {
     public class UserBookModel
     {
-        public string BookId { get; set; } = string.Empty;
-        public string UserId { get; set; } = string.Empty;
+        public int BookId { get; set; }
+        public int UserId { get; set; }
 
     }
 }
