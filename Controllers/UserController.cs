@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Library_Management_System.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Management_System.Controllers
@@ -7,6 +8,7 @@ namespace Library_Management_System.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        [HttpGet]
         public ActionResult<IEnumerable<UserData>> GetUsers()
         {
             return Ok(UserData.users.user);
@@ -23,6 +25,31 @@ namespace Library_Management_System.Controllers
                 return NotFound();
             }
             return Ok(UserToReturn);
+        }
+
+        [HttpPost]
+        public ActionResult saveuser(int id, String Name)
+        {
+            UserModel user = new UserModel()
+            {
+                Id = id,
+                Name = Name
+            };
+            UserData.users.user.Add(user);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult removeuser(int id)
+        {
+            UserModel user = new UserModel()
+            {
+                Id = id
+            };
+            UserData.users.user.Remove(user);
+
+            return Ok(true);
         }
     }
 }

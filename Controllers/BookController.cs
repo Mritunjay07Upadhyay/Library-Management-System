@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Library_Management_System.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Management_System.Controllers
@@ -7,6 +8,7 @@ namespace Library_Management_System.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+        [HttpGet]
         public ActionResult<IEnumerable<BookData>> GetBooks()
         {
             return Ok(BookData.books.book);
@@ -24,5 +26,20 @@ namespace Library_Management_System.Controllers
             }
             return Ok(BookToReturn);
         }
+
+        [HttpPost]
+        public ActionResult SaveBook(string name, string author)
+        {
+            BookModel book = new BookModel()
+            {
+                Name = name,
+                Author = author
+            };
+
+            BookData.books.book.Add(book);
+
+            return Ok(true);
+        }
+
     }
 }

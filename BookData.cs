@@ -13,27 +13,32 @@ namespace Library_Management_System
                 new BookModel()
                 {
                     Id = 1,
-                    Name = "Book1"
+                    Name = "Book1",
+                    Author = "Author1"
                 },
                 new BookModel()
                 {
                     Id = 2,
-                    Name = "Book2"
+                    Name = "Book2",
+                    Author = "Author2"
                 },
                 new BookModel()
                 {
                     Id = 3,
-                    Name = "Book3"
+                    Name = "Book3",
+                    Author = "Author3"
                 },
                 new BookModel()
                 {
                     Id = 4,
-                    Name = "Book4"
+                    Name = "Book4",
+                    Author = "Author4"
                 },
                 new BookModel()
                 {
                     Id = 5,
-                    Name = "Book5"
+                    Name = "Book5",
+                    Author = "Author5"
                 }
             };
         }
