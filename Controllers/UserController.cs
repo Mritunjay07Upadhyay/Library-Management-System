@@ -28,12 +28,12 @@ namespace Library_Management_System.Controllers
         }
 
         [HttpPost]
-        public ActionResult saveuser(int id, String Name)
+        public ActionResult saveuser(int id, String name)
         {
             UserModel user = new UserModel()
             {
                 Id = id,
-                Name = Name
+                Name = name
             };
             UserData.users.user.Add(user);
 
@@ -43,11 +43,15 @@ namespace Library_Management_System.Controllers
         [HttpDelete]
         public ActionResult removeuser(int id)
         {
-            UserModel user = new UserModel()
-            {
-                Id = id
-            };
-            UserData.users.user.Remove(user);
+            //UserModel user = new UserModel()
+            //{
+            //    Id = id
+            //};
+
+            var itemToRemove = UserData.users.user.Single(r => r.Id == id);
+            UserData.users.user.Remove(itemToRemove);
+
+            // UserData.users.user.Remove(user);
 
             return Ok(true);
         }

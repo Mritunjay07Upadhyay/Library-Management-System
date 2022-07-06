@@ -9,17 +9,20 @@ namespace Library_Management_System.Controllers
     public class BookUserController : ControllerBase
     {
         [HttpPost]
-        public ActionResult SaveUserBook(int userId, int bookId)
+        public ActionResult SaveUserBook([FromBody]UserBookModel book)
         {
-            UserBookModel userbook = new UserBookModel()
-            {
-                BookId = bookId,
-                UserId = userId
-            };
 
-            BookData.books.userbook.Add(userbook);
+            //UserBookModel userbook = new UserBookModel()
+            //{
+            //    BookId = bookId,
+            //    UserId = userId
+            //};
 
-            return Ok(true);
+            // BookData.books.userbook.Add(userbook);
+
+            BookData.books.userbook.Add(book);
+
+            return Ok(book);
         }
 
         [HttpGet]
