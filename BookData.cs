@@ -5,9 +5,14 @@ namespace Library_Management_System
     public class BookData
     {
         public List<BookModel> book { get; set; }
+        public List<UserBookModel> userbook { get; set; }
         public static BookData books { get; set; } = new BookData();
+       
+
         public BookData()
         {
+            userbook = new List<UserBookModel>();
+          
             book = new List<BookModel>()
             {
                 new BookModel()

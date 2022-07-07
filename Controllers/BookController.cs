@@ -15,7 +15,7 @@ namespace Library_Management_System.Controllers
         }
 
         [HttpGet("{Id}")]
-        public ActionResult GetUser(int id)
+        public ActionResult GetBook(int id)
         {
             // Find City
             var BookToReturn = BookData.books.book.FirstOrDefault(c => c.Id == id);
@@ -27,7 +27,7 @@ namespace Library_Management_System.Controllers
             return Ok(BookToReturn);
         }
 
-        [HttpPost]
+        [HttpPost("savebook")]
         public ActionResult SaveBook(string name, string author)
         {
             BookModel book = new BookModel()
@@ -38,8 +38,21 @@ namespace Library_Management_System.Controllers
 
             BookData.books.book.Add(book);
 
-            return Ok(true);
+            return Ok(book);
         }
 
+        [HttpPost("saveuserbook")]
+        public ActionResult SaveUserBook(int userId, int bookId)
+        {
+            UserBookModel userbook = new UserBookModel()
+            {
+                BookId = bookId,
+                UserId = userId
+            };
+
+            BookData.books.userbook.Add(userbook);
+
+            return Ok(true);
+        }
     }
 }
